@@ -27,29 +27,29 @@ bitwise operations BUT - Don't worry - the audience of this video isn't Math or 
 
 
 So, but Before I dive in, I will first paste a number and a code-snippet which, will look very obvious to everyone:
-
+```
 for i in {0..10}; do echo "$i = $(( $i << 24 )); in some games"; done
 16777216
-
+```
 
 It's obvious what it is right? 
 Jokes aside,
 No, No Of Course it's not, what is 16777216? 
 and what's that big line of commanmds?
 Let me explain!
-
+```
 $i << 24
 
 is a "left bitwise shift" 24 times, of number "$i" so if you set "$i" to be 2 for example, we have 
 2 << 24 = 33554432
-
+```
 Why is this important? What is this?
 Well, as I previously mentioned,
 BUT let me re-state it into more obvious terms:
-
+```
 2   <<   24    =      33554432
 <  this     equals   this >
-
+```
 Now, a common misconception is,
 okay so instead of
 	var=2
@@ -58,20 +58,23 @@ we do
 
 But that's wrong, because that's setting the value *anyway*,
 what is "correct" (if you using bitwise ops that is)
+```
 is
 	var << 24
-
+```
 # Now Finally I will explain #
+```
 Why use 
 	1 << 24 (which is 16777216 to be scanned for)
 instead of
 	var = 1
 ?
+```
 Because, game devs sometimes use 
 BitWise Operations as a FASTER drop-in replacement for explicit variable-setting.
 
 So we can use this knowledge to make a loop to predict new "1,2,3" values to scan for:
-
+```
 # for i in {0..10}; do echo "$i = $(( $i << 24 )); in some games"; done
 0 = 0; in some games
 1 = 16777216; in some games
@@ -84,7 +87,7 @@ So we can use this knowledge to make a loop to predict new "1,2,3" values to sca
 8 = 134217728; in some games
 9 = 150994944; in some games
 10 = 167772160; in some games
-
+```
 So, in essence what this gives us is a very neat table with new "1"'s and "2"'s (..)'s To scan for
 
 imagine a game which don't use 
@@ -100,14 +103,14 @@ For example,
 Let's take a example of my own godot game(you can find demos of it on my yt)
 I will later on use BitWise operations instead of assigning a value cuz it's faster,
 so my game use bitwise operation `1 << 24` for saying "player has not used a key yet" 
-
+```
 so,
 instead of you scanning for:
 	"1" and then "0"
 you scan for
 	"16777216" and then "0"
-	
-Now, what does this give us?
+```
+## Now, what does this give us?
 It gives us the results quicker! cuz quite more "few" results would have 16777216 as a "1",
 Now, it might still be 1,000~ but, that's at least in the realm of "possibilites"
 
